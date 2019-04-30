@@ -4,7 +4,7 @@ import Service from "./service";
 import Schedule from 'node-schedule';
 import {
   CONTACT_ALIAS,
-  CONTACT_NAME,
+  CONTACT_NAME, ENABLE_TULING_MACHINE,
   HELLO_WORLD,
   MY_NAME,
   ROOM_TPOIC,
@@ -64,16 +64,18 @@ export default class WechatBoy {
     if (room) {
       const topic = await room.topic();
       console.log(`room: ${topic} send by: ${contact.name()} content: ${content}`);
-      if (await msg.mentionSelf() && topic === ROOM_TPOIC) {
+      if (ENABLE_TULING_MACHINE && await msg.mentionSelf() && topic === ROOM_TPOIC) {
         reply = await Service.reply(content.replace(MY_NAME, ''));
         await room.say(reply);
         console.log(`tuling reply: ${reply}`);
       }
     } else {
       console.log(`sends by: ${contact.name()} content: ${content}`);
-      reply = await Service.reply(content);
-      await contact.say(reply);
-      console.log(`tuling reply: ${reply}`);
+      if (ENABLE_TULING_MACHINE) {
+        reply = await Service.reply(content);
+        await contact.say(reply);
+        console.log(`tuling reply: ${reply}`);
+      }
     }
   };
 

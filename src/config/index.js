@@ -25,3 +25,5 @@ export const SCHEDULE_CONFIG = '0 0 8 * * *';
 
 // 是否使用本地数据，因为免费接口有次数限制，调试建议开启mock
 export const MOCK = true;
+
+export const ENABLE_TULING_MACHINE = false;
