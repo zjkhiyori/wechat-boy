@@ -4,10 +4,11 @@ import Service from "./service";
 import Schedule from 'node-schedule';
 import {
   CONTACT_ALIAS,
-  CONTACT_NAME, ENABLE_TULING_MACHINE,
+  CONTACT_NAME,
+  ENABLE_TULING_MACHINE,
   HELLO_WORLD,
   MY_NAME,
-  ROOM_TPOIC,
+  ROOM_TOPIC,
   SCHEDULE_CONFIG,
 } from "./config";
 
@@ -39,10 +40,18 @@ export default class WechatBoy {
   async onLogin(user) {
     console.log(`user ${user.name()} login !`);
     const contact = await this.boy.Contact.find({ alias: CONTACT_ALIAS });
-    const group = await this.boy.Room.find({ topic: ROOM_TPOIC });
+    const group = await this.boy.Room.find({ topic: ROOM_TOPIC });
     // 与好友打招呼
-    await contact.say(HELLO_WORLD);
-    // await group.say(HELLO_WORLD);
+    if (contact !== null) {
+      await contact.say(HELLO_WORLD);
+    } else {
+      console.log('contact not found');
+    }
+    if (group !== null) {
+      await group.say(HELLO_WORLD);
+    } else {
+      console.log('group not found')
+    }
     // 发送天气
     // const weather = await Service.getWeather();
     // await contact.say(weather);
@@ -52,7 +61,7 @@ export default class WechatBoy {
     // await contact.say(news);
     // await group.say(news);
     // 设置定时任务
-    this.schedule()
+    // this.schedule()
   };
 
   async onMessage (msg) {
@@ -64,7 +73,7 @@ export default class WechatBoy {
     if (room) {
       const topic = await room.topic();
       console.log(`room: ${topic} send by: ${contact.name()} content: ${content}`);
-      if (ENABLE_TULING_MACHINE && await msg.mentionSelf() && topic === ROOM_TPOIC) {
+      if (ENABLE_TULING_MACHINE && await msg.mentionSelf() && topic === ROOM_TOPIC) {
         reply = await Service.reply(content.replace(MY_NAME, ''));
         await room.say(reply);
         console.log(`tuling reply: ${reply}`);
