@@ -867,7 +867,7 @@ extglob@^2.0.4:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-file-box@^0.8.23, file-box@^0.8.27:
+file-box@^0.8.23:
   version "0.8.27"
   resolved "https://registry.yarnpkg.com/file-box/-/file-box-0.8.27.tgz#f209ed07709819a1cccde2c7c7e7391bce117a14"
   dependencies:

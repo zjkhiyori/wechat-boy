@@ -13,7 +13,6 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
-    "file-box": "^0.8.27",
     "node-schedule": "^1.3.2",
     "qrcode-terminal": "^0.12.0",
     "rimraf": "^2.6.3",
