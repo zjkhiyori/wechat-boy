@@ -37,9 +37,9 @@ export const TULING_ERROR_MESSAGE = '可爱小机器宕机啦 :>_<":';
 //招呼语
 export const HELLO_WORLD = 'Hello 可爱聪明的小机器人上线啦 :>_<:';
 // 自己的昵称
-export const MY_NAME = '@资深syachiku';
+export const MY_NAME = '@name';
 // 想要发消息的人（备注）
-export const CONTACT_ALIAS = '冰仔';
+export const CONTACT_ALIAS = 'alias';
 // 想要发送消息的群组
 export const ROOM_TPOIC = '富强民主和谐';
 // 每分钟的第30秒： '30 * * * * *'
