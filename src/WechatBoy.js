@@ -1,4 +1,4 @@
-import {Wechaty} from "wechaty";
+import {Friendship, Wechaty} from "wechaty";
 import QrTerm from "qrcode-terminal";
 import Service from "./service";
 import Schedule from 'node-schedule';
@@ -8,6 +8,7 @@ import {
   ENABLE_TULING_MACHINE,
   HELLO_WORLD,
   MY_NAME,
+  NEW_FRIENDS_ACCEPT_MSG,
   ROOM_TOPIC,
   SCHEDULE_CONFIG,
 } from "./config";
@@ -18,12 +19,14 @@ export default class WechatBoy {
     this.onLogin = this.onLogin.bind(this);
     this.onMessage = this.onMessage.bind(this);
     this.onLogout = this.onLogout.bind(this);
+    this.onFriendship = this.onFriendship.bind(this);
 
     this.boy = Wechaty.instance({ name: 'wechat-boy' });
     this.boy.on('scan', this.onScan)
       .on('login', this.onLogin)
       .on('message', this.onMessage)
       .on('logout', this.onLogout)
+      .on('friendship', this.onFriendship)
       .start()
       .then(() => {
         console.log('start login your wechat account')
@@ -91,6 +94,13 @@ export default class WechatBoy {
   onLogout(user) {
     console.log(`user ${user} logout`);
   };
+
+  async onFriendship(friendship) {
+    console.log(`new friend request from ${friendship.contact().name()}, type: ${friendship.type()}, greetings: ${friendship.hello()}`);
+    if (friendship.type() === Friendship.Type.Receive && friendship.hello() === NEW_FRIENDS_ACCEPT_MSG) {
+      await friendship.accept();
+    }
+  }
 
   schedule() {
     console.log('start schedule mission');

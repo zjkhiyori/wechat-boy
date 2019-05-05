@@ -14,6 +14,7 @@ export const MY_NAME = '@资深syachiku'; // 自己的昵称
 export const CONTACT_ALIAS = '冰仔'; // 想要发消息的人（备注）
 export const CONTACT_NAME = ''; // 想要发送消息的人（真实昵称）
 export const ROOM_TOPIC = '伐木累'; // 想要发送消息的群组
+export const NEW_FRIENDS_ACCEPT_MSG = 'hello';
 // 每分钟的第30秒： '30 * * * * *'
 // 每小时的1分30秒 ：'30 1 * * * *'
 // 每天的1点1分30秒 ：'30 1 1 * * *'
